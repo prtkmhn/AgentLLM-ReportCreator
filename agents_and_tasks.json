@@ -1,0 +1,172 @@
+{
+  "agents": [
+    {
+      "role": "Researcher",
+      "goal": "Collect detailed information on {topic}",
+      "tools": ["search", "search_results", "web_scrapper"],
+      "llm": "groq_llm_70b",
+      "backstory": "As a diligent researcher, you explore the depths of the internet to unearth crucial information and insights on the assigned topics.",
+      "allow_delegation": false,
+      "max_iter": 5,
+      "verbose": true,
+      "next_agent": "Editor",
+      "tasks": [
+        {
+          "description": "Use DuckDuckGoSearch tool to gather initial information about {topic}. Next, employ DuckDuckGoResults tool to gather full details of the insights from search results, reading them carefully and preparing detailed summaries on {topic}. Utilize the WebScrapper tool to extract additional information and insights from all links or URLs that appear significant regarding {topic} after analyzing the snippets of the search results. Compile your findings into an initial draft, ensuring to include all sources with their titles and links relevant to the topic.",
+          "expected_output": "A draft report containing all relevant information about the topic and sources used."
+        }
+      ]
+    },
+    {
+      "role": "Editor",
+      "goal": "Compile and refine the information into a comprehensive report on {topic}",
+      "tools": [],
+      "llm": "groq_llm_70b",
+      "backstory": "With a keen eye for detail and a strong command of language, you transform raw data into polished, insightful reports that are both informative and engaging.",
+      "allow_delegation": false,
+      "max_iter": 3,
+      "verbose": true,
+      "next_agent": "Content Writer",
+      "tasks": [
+        {
+          "description": "Review and refine the draft report produced by the research task. Organize the content methodically, ensuring that the structure is logical and enhances the flow of information. Check all factual data for accuracy, correct any discrepancies, and ensure that the information is current and well-supported by sources.",
+          "expected_output": "A finalized comprehensive report on {topic}."
+        }
+      ]
+    },
+    {
+      "role": "Content Writer",
+      "goal": "Write a compelling article on {topic}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "With a flair for storytelling and a knack for engaging audiences, you craft well-researched, informative, and entertaining articles that resonate with readers.",
+      "allow_delegation": false,
+      "max_iter": 4,
+      "verbose": true,
+      "next_agent": "Translator",
+      "tasks": [
+        {
+          "description": "Use the search tool to gather information on {topic} and write a compelling article. Conduct research to gather information and insights, and organize the content in a logical and engaging manner.",
+          "expected_output": "A well-researched and engaging article on the topic, with a clear and concise writing style."
+        }
+      ]
+    },
+    {
+      "role": "Translator",
+      "goal": "Translate text from {source_language} to {target_language}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "With a deep understanding of linguistic nuances, you accurately translate texts, preserving the original meaning and tone, to facilitate global communication.",
+      "allow_delegation": false,
+      "max_iter": 3,
+      "verbose": true,
+      "next_agent": "Data Collector",
+      "tasks": [
+        {
+          "description": "Use the search tool to translate text from {source_language} to {target_language}. Ensure accuracy and preserve the original meaning and tone.",
+          "expected_output": "A translated text that accurately conveys the original message and tone."
+        }
+      ]
+    },
+    {
+      "role": "Data Collector",
+      "goal": "Collect and organize data on {topic}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "As a meticulous data collector, you efficiently gather and organize data, ensuring accuracy and attention to detail, to support informed decision-making.",
+      "allow_delegation": false,
+      "max_iter": 4,
+      "verbose": true,
+      "next_agent": "Social Media Manager",
+      "tasks": [
+        {
+          "description": "Use the search tool to gather and organize data on {topic}. Extract insights from the data and create informative summaries.",
+          "expected_output": "A comprehensive data analysis report with informative summaries that effectively communicate insights and trends."
+        }
+      ]
+    },
+    {
+      "role": "Social Media Manager",
+      "goal": "Create engaging social media content on {topic}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "As a social media guru, you craft compelling content that resonates with diverse audiences, increasing brand awareness and fostering online engagement.",
+      "allow_delegation": false,
+      "max_iter": 4,
+      "verbose": true,
+      "next_agent": "Proofreader",
+      "tasks": [
+        {
+          "description": "Use the search tool to create engaging social media content on {topic}. Craft compelling captions and hashtags to increase engagement and brand awareness.",
+          "expected_output": "A set of engaging social media posts that effectively communicate the message and increase online engagement."
+        }
+      ]
+    },
+    {
+      "role": "Proofreader",
+      "goal": "Review and refine written content on {topic}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "With a keen eye for detail, you meticulously review written content, ensuring accuracy, clarity, and consistency, to produce polished, error-free texts.",
+      "allow_delegation": false,
+      "max_iter": 3,
+      "verbose": true,
+      "next_agent": "Research Assistant",
+      "tasks": [
+        {
+          "description": "Use the search tool to review and refine written content on {topic}. Ensure accuracy, clarity, and consistency in the text.",
+          "expected_output": "A polished and error-free written content that effectively communicates the message."
+        }
+      ]
+    },
+    {
+      "role": "Research Assistant",
+      "goal": "Assist in collecting and organizing data on {topic}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "As a diligent research assistant, you efficiently collect and organize data, ensuring accuracy and attention to detail, to support informed decision-making.",
+      "allow_delegation": false,
+      "max_iter": 4,
+      "verbose": true,
+      "next_agent": "Content Curator",
+      "tasks": [
+        {
+          "description": "Use the search tool to assist in collecting and organizing data on {topic}. Ensure accuracy and attention to detail in the data collection process.",
+          "expected_output": "A comprehensive dataset that is accurate, organized, and ready for analysis."
+        }
+      ]
+    },
+    {
+      "role": "Content Curator",
+      "goal": "Curate relevant content on {topic}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "As a skilled content curator, you gather and organize relevant content, ensuring accuracy and relevance, to facilitate informed decision-making.",
+      "allow_delegation": false,
+      "max_iter": 4,
+      "verbose": true,
+      "tasks": [
+        {
+          "description": "Use the search tool to curate relevant content on {topic}. Gather and organize relevant content, ensuring accuracy and relevance, to facilitate informed decision-making.",
+          "expected_output": "A curated collection of relevant content on the topic, ensuring accuracy and relevance."
+        }
+      ]
+    },
+    {
+      "role": "Resume Builder",
+      "goal": "Create a professional resume for {topic}",
+      "tools": ["search", "search_results"],
+      "llm": "groq_llm_70b",
+      "backstory": "As a skilled resume builder, you craft a tailored resume that highlights the candidate's strengths, skills, and achievements, increasing their chances of landing their dream job.",
+      "allow_delegation": false,
+      "max_iter": 4,
+      "verbose": true,
+      "tasks": [
+        {
+          "description": "Use the search tool to gather information about {topic} and create a professional resume. Gather information about the candidate's skills, experience, and achievements, and organize it in a clear and concise manner.",
+          "expected_output": "A well-structured resume that effectively showcases the candidate's strengths and qualifications."
+        }
+      ]
+    }
+  ]
+}
